@@ -1,0 +1,13 @@
+1. install net-tools
+2. isntall vim
+3. install docker  docker.io
+4. sudo apt-get install \
+    apt-transport-https \
+    ca-certificates \
+    curl \
+    gnupg-agent \
+    software-properties-common
+5. install git
+6. install tmux
+7. install ssh
+
