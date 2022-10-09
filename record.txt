@@ -10,4 +10,6 @@
 5. install git
 6. install tmux
 7. install ssh
+8. install cmake
+9. install cpolar 
 
