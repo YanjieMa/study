@@ -7,16 +7,17 @@
 #include <arpa/inet.h>
 
 #define SERVER_PORT 9527
-#define SERVER_IP "127.0.0.1"
+#define SERVER_IP "192.168.1.25"
 
 int main(int argc, char ** argv)
 {
+	char send_buf[1024];
 	struct sockaddr_in server_addr;
-	char *server_ip = SERVER_IP;
+
 	memset(&server_addr,0,sizeof(struct sockaddr_in));
 	server_addr.sin_family = AF_INET;
 	server_addr.sin_port = htons(SERVER_PORT);
-	inet_pton(AF_INET,server_ip,&server_addr.sin_addr);
+	inet_pton(AF_INET,SERVER_IP,&server_addr.sin_addr.s_addr);
 	
 	int tcp_com_fd;
 	tcp_com_fd = socket(AF_INET,SOCK_STREAM,0);
@@ -31,16 +32,18 @@ int main(int argc, char ** argv)
 		perror("connect error");
 		exit(-1);
 	}
-	
-	char * send_buf = "hello";
-	int n = 0;
-	n = send(tcp_com_fd,send_buf,strlen(send_buf),0);
-	if(n < 0){
-		perror("send error");
+	while(1){	
+		memset(send_buf,0,sizeof(send_buf));
+		printf("input:");
+		gets(send_buf);
+		send_buf[strlen(send_buf)] = '\n';
+		int n = send(tcp_com_fd,send_buf,strlen(send_buf),0);
+		if(n < 0){
+			perror("send error");
+		}
 	}
 
 	close(tcp_com_fd);
-	tcp_com_fd = -1;
 
 	return 0;
 }
