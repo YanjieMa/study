@@ -7,7 +7,7 @@
     curl \
     gnupg-agent \
     software-properties-common
-5. install git
+5. install git --> setting token
 6. install tmux
 7. install ssh
 8. install cmake
