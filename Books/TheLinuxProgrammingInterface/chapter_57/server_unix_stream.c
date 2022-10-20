@@ -30,7 +30,7 @@ int main(int argc, char ** argv)
 	memset(&addr,0,sizeof(struct sockaddr_un));
 	addr.sun_family = AF_UNIX;
 	strncpy(addr.sun_path,sock_path,sizeof(addr.sun_path)-1);
-
+	//保证sun_path的最后一盒字节是NULL
 	int ret = bind(sock_fd,(struct sockaddr *)&addr,sizeof(struct sockaddr_un));
 	if(ret < 0){
 		perror("bind error");
@@ -60,7 +60,7 @@ int main(int argc, char ** argv)
 
 
 		int n;
-		while((n = read(com_fd,recv_buf,1024)) > 0){
+		while((n = read(com_fd,recv_buf,sizeof(recv_buf))) > 0){
 			if(write(STDOUT_FILENO,recv_buf,n) != n){
 				printf("write error\n");
 			}

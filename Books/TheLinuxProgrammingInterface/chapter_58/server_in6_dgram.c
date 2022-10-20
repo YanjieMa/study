@@ -34,9 +34,10 @@ int main(int argc, char ** argv)
 	fprintf(stdout,"step %d: init sucess\n",1);
 	while(1){
 		memset(client_ip,0,sizeof(client_ip));
+		memset(recv_buf,0,sizeof(recv_buf));
 		int size = 	recvfrom(sock_fd,recv_buf,sizeof(recv_buf),0,(struct sockaddr *)&client_addr,&client_addr_len);
 		inet_ntop(AF_INET6,&client_addr.sin6_addr,client_ip,256);
-		printf("clinet ip:%s, port:%d\n",client_ip,ntohs(client_addr.sin6_port));
+		printf("clinet ip:%s, port:%d, msg:%s",client_ip,ntohs(client_addr.sin6_port),recv_buf);
 		memset(send_buf,0,sizeof(send_buf));
 		for(int j=0; j<size; j++){
 			send_buf[j] = toupper(recv_buf[j]);

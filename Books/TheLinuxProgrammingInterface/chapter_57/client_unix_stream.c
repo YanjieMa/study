@@ -21,18 +21,32 @@ int main(int argc, char ** argv)
 		*/
 	}
 	
-
 	struct sockaddr_un addr;
 	memset(&addr,0,sizeof(struct sockaddr_un));
 	addr.sun_family = AF_UNIX;
 	strncpy(addr.sun_path,sock_path,sizeof(addr.sun_path)-1);
+
+    struct sockaddr_un client_addr;
+    memset(&client_addr,0,sizeof(client_addr));
+    client_addr.sun_family = AF_UNIX;
+    snprintf(client_addr.sun_path,sizeof(client_addr.sun_path),"/home/ma/tmp/my_unix_socket.%ld",(long)getpid());
+
+    int ret = bind(sock_fd,(struct sockaddr *)&client_addr,sizeof(client_addr));
+    if(ret < 0){
+        perror("bind error");
+        exit(-1);
+    }
+
+
+
+
+
 
 	printf("connecting...\n");
 
 	int com_fd;
 	char send_buf[1024];
 
-	int ret;
 	ret = connect(sock_fd,(struct sockaddr *)&addr,sizeof(struct sockaddr_un));
 	if(ret < 0){
 		perror("connect error");

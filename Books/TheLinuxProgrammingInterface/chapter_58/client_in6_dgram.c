@@ -32,7 +32,7 @@ int main(int argc, char **argv)
 		sendto(sock_fd,send_buf,strlen(send_buf),0,(struct sockaddr *)&server_addr,sizeof(struct sockaddr_in6));
 
 		recvfrom(sock_fd,recv_buf,sizeof(recv_buf),0,NULL,NULL);
-		printf("recv:%s\n",recv_buf);
+		printf("recv:%s",recv_buf);
 	}
 	close(sock_fd);
 
