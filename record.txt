@@ -12,4 +12,5 @@
 7. install ssh
 8. install cmake
 9. install cpolar 
-
+10. add vim help
+11. add git/study to my server 
