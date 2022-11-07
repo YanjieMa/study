@@ -2,6 +2,62 @@
 
 using namespace std;
 
+//test 10
+#define MAX 3
+class Full{
+	int a;
+public:
+	Full(int i):a(i) {}
+	int getValue(){
+		return a;
+	}
+};
+class Empty{
+public:
+	Empty(){
+		cout << "empyt is" << endl;
+	}
+};
+
+class Stack{
+private:
+	int s[MAX];
+	int top;
+public:
+	Stack(){top = -1;}
+	void push(int a){
+		if(top >= MAX-1) throw Full(a);
+		s[++top] = a;
+	}
+	int pop(){
+		if(top < 0){
+			throw Empty();
+		}
+		return s[top--];
+	}
+};
+
+void test10()
+{
+	Stack s;
+
+	try{
+		s.push(10);
+		s.push(20);
+		s.pop();
+		s.pop();
+		s.pop();
+		s.pop();
+		s.pop();
+		s.push(40);
+	}
+	catch(Full e){
+		cout << "the value is "<< e.getValue() << endl;
+	}
+	catch(Empty){
+		cout << "stack is empty" << endl;
+	}
+}
 
 
 
@@ -88,6 +144,6 @@ void test9_2(){
 
 int main()
 {
-	test9_2();
+	test10();
 	return 0;
 }
