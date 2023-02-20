@@ -1,0 +1,10 @@
+预处理
+	g++ -E main.cpp -o main.i
+编译成汇编
+	g++ -S main.cpp -o main.s
+汇编到目标代码
+	g++ -c main.s -o main.o
+生成连接文件
+	g++ main.o -o main
+-I 头文件路径
+	g++ main.cpp -o main -I./

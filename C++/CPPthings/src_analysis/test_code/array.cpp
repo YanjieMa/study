@@ -106,6 +106,7 @@ int main()
 {
 
 	test1();
+/*
 	cout << "*************" << endl;
 	test2();
 	cout << "*************" << endl;
@@ -118,6 +119,7 @@ int main()
 	test6();
 	cout << "*************" << endl;
 	test7();
+*/
 	return 0;
 
 /*

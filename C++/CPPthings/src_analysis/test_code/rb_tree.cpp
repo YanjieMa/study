@@ -57,21 +57,19 @@ struct _Rb_tree_iterator{
 	
 	_Base_ptr _M_node; 
 
-	ref
+
+	// 重载获取数据
+	reference operator*() const _GLIBCXX_NOEXCEPT{
+		return *static_cast<_Link_type> (_M_node)->_M_valptr();
+	}
+
+	pointer operator->() const _GLIBCXX_NOEXCEPT{
+		return static_cast<_Link_type> (_M_node)->_M_valptr();
+	}
+
 };
 
-/*
-// 重载获取数据
-reference
-operator*() const _GLIBCXX_NOEXCEPT{
-	return *static_cast<_Link_type> (_M_node)->_M_valptr();
-}
 
-pointer 
-operator->() const _GLIBCXX_NOEXCEPT{
-	return static_cast<_Link_type> (_M_node)->_M_valptr();
-}
-*/
 
 int main()
 {

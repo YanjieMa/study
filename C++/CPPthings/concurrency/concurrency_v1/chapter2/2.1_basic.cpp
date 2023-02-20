@@ -9,6 +9,7 @@
 
 using namespace std;
 
+//重载了operator()的类
 class background_task {
 public:
     void operator()() const {
@@ -20,6 +21,7 @@ void do_something(int &i) {
     cout << "do_something" << endl;
 }
 
+//重载了operator()的类
 struct func {
     int &i;
 
