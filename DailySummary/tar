@@ -16,3 +16,8 @@ tar
 
 -z .gz 文件专属
 -j .bz2 专属
+
+解压文件：
+	tar -zxvf file.tar.gz 
+压缩文件：
+	tar -zcvf file file.tar.gz
