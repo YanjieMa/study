@@ -7,7 +7,7 @@
 
 using namespace std;
 
-//信号不会终端自身的执行 只会pending
+//信号不会中断自身的执行 只会pending
 //信号A执行期间 信号B产生了 如果没有mask 则会打断信号A的执行 若A中正在sleep 返回时直接唤醒； 弱信号B有mask，则执行完A才收到信号B并执行
 
 void (*old_handler)(int);

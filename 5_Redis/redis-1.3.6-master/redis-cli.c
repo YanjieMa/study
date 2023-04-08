@@ -27,18 +27,23 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
+#define MM 1
 
+#if MM
 #include "fmacros.h"
+#endif
 
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
 #include <unistd.h>
 
+#if MM
 #include "anet.h"
 #include "sds.h"
 #include "adlist.h"
 #include "zmalloc.h"
+#endif
 
 #define REDIS_CMD_INLINE 1
 #define REDIS_CMD_BULK 2
@@ -474,7 +479,9 @@ static void repl() {
 
         authargv[0] = "AUTH";
         authargv[1] = config.auth;
+		#if MM
         cliSendCommand(2, convertToSds(2, authargv));
+		#endif
     }
 
     while (prompt(line, size)) {
@@ -491,7 +498,9 @@ static void repl() {
         }
 
         config.repeat = 1;
+		#if MM
         cliSendCommand(argc, convertToSds(argc, args));
+		#endif
         line = buffer;
     }
 
@@ -515,9 +524,9 @@ int main(int argc, char **argv) {
     argv += firstarg;
 
     if (argc == 0 || config.interactive == 1) repl();
-
+	#if MM
     argvcopy = convertToSds(argc, argv);
-
+	#endif
     /* Read the last argument from stdandard input if needed */
     if ((rc = lookupCommand(argv[0])) != NULL) {
       if (rc->arity > 0 && argc == rc->arity-1) {
