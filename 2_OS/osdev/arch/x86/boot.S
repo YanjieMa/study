@@ -32,7 +32,7 @@
 		movw %ax, (%esp)
 		lgdt (%esp)
 		addl $0x6, %esp
-
+		/*初始化段寄存器*/
 		movw $0x10, %cx
 		movw %cx, %es
 		movw %cx, %ds
